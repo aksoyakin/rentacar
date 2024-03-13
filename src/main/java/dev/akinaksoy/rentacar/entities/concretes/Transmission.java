@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "transmissions")
-public class Transmisssion extends BaseEntity {
+public class Transmission extends BaseEntity {
 
     @Column(name = "name")
     private String name;

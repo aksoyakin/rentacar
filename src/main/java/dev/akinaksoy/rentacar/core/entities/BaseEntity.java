@@ -17,7 +17,13 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @Column(name = "createdDate")
     private LocalDateTime createdDate;
+
+    @Column(name = "updatedDate")
     private LocalDateTime updatedDate;
+
+    @Column(name = "deletedDate")
     private LocalDateTime deletedDate;
 }

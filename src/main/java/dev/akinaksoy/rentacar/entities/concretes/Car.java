@@ -14,12 +14,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "cars")
 public class Car extends BaseEntity {
+
     @Column(name = "modelYear")
     private int modelYear;
+
     @Column(name = "plate")
     private String plate;
+
     @Column(name = "name")
     private int state;
+
     @Column(name = "dailyPrice")
     private double dailyPrice;
 
