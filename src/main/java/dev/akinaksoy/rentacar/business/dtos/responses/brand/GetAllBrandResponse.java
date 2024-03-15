@@ -1,4 +1,4 @@
-package dev.akinaksoy.rentacar.business.dtos.responses;
+package dev.akinaksoy.rentacar.business.dtos.responses.brand;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
