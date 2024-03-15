@@ -9,8 +9,6 @@ import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.BrandRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Brand;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
