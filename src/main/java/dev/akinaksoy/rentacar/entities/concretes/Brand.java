@@ -11,17 +11,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity
-@Table(name = "brands")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="brands")
 public class Brand extends BaseEntity {
-
     @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "brand")
     private List<Model> models;
-
 }

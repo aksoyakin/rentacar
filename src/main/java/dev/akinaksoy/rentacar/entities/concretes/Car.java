@@ -7,28 +7,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "cars")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="cars")
 public class Car extends BaseEntity {
+    @Column(name="modelYear")
+    private String modelYear;
 
-    @Column(name = "modelYear")
-    private int modelYear;
-
-    @Column(name = "plate")
+    @Column(name="plate")
     private String plate;
 
-    @Column(name = "name")
+    @Column(name="state")
     private int state;
 
-    @Column(name = "dailyPrice")
+    @Column(name="dailyPrice")
     private double dailyPrice;
 
     @ManyToOne
-    @JoinColumn(name = "model_id")
+    @JoinColumn(name = "modelId")
     private Model model;
-
-
 
 }

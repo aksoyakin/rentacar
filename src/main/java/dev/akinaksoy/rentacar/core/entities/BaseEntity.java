@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @MappedSuperclass
 public class BaseEntity {
 
@@ -17,13 +17,11 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
     @Column(name = "createdDate")
     private LocalDateTime createdDate;
-
     @Column(name = "updatedDate")
     private LocalDateTime updatedDate;
-
-    @Column(name = "deletedDate")
+    @Column(name = "deleteDate")
     private LocalDateTime deletedDate;
+
 }

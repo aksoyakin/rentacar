@@ -8,32 +8,28 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity
-@Table(name = "models")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="models")
 public class Model extends BaseEntity {
-
-    @Column(name = "name")
+    @Column(name="name")
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "brandId")
+    @JoinColumn(name="brandId")
     private Brand brand;
 
     @ManyToOne
-    @JoinColumn(name = "fuelId")
+    @JoinColumn(name="fuelId")
     private Fuel fuel;
 
     @ManyToOne
-    @JoinColumn(name = "transmissionId")
+    @JoinColumn(name="tranmissionId")
     private Transmission transmission;
 
     @OneToMany(mappedBy = "model")
     private List<Car> cars;
-
-
-
 
 }

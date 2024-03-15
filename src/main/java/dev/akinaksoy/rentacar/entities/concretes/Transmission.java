@@ -11,14 +11,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Entity
-@Table(name = "transmissions")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="transmissions")
 public class Transmission extends BaseEntity {
-
-    @Column(name = "name")
+    @Column(name="name")
     private String name;
 
     @OneToMany(mappedBy = "transmission")
