@@ -1,9 +1,9 @@
 package dev.akinaksoy.rentacar.business.abstracts;
 
 
-import dev.akinaksoy.rentacar.business.dtos.requests.CreateBrandRequest;
-import dev.akinaksoy.rentacar.business.dtos.responses.CreatedBrandResponse;
-import dev.akinaksoy.rentacar.business.dtos.responses.GetAllBrandResponse;
+import dev.akinaksoy.rentacar.business.dtos.requests.brand.CreateBrandRequest;
+import dev.akinaksoy.rentacar.business.dtos.responses.brand.CreatedBrandResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetAllBrandResponse;
 
 import java.util.List;
 
