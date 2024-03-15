@@ -1,9 +1,9 @@
 package dev.akinaksoy.rentacar.api.controllers;
 
 import dev.akinaksoy.rentacar.business.abstracts.BrandService;
-import dev.akinaksoy.rentacar.business.dtos.requests.CreateBrandRequest;
-import dev.akinaksoy.rentacar.business.dtos.responses.CreatedBrandResponse;
-import dev.akinaksoy.rentacar.business.dtos.responses.GetAllBrandResponse;
+import dev.akinaksoy.rentacar.business.dtos.requests.brand.CreateBrandRequest;
+import dev.akinaksoy.rentacar.business.dtos.responses.brand.CreatedBrandResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetAllBrandResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
