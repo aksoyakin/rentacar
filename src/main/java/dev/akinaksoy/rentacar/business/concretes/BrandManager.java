@@ -1,13 +1,14 @@
 package dev.akinaksoy.rentacar.business.concretes;
 
 import dev.akinaksoy.rentacar.business.abstracts.BrandService;
-import dev.akinaksoy.rentacar.business.dtos.requests.CreateBrandRequest;
-import dev.akinaksoy.rentacar.business.dtos.responses.CreatedBrandResponse;
+import dev.akinaksoy.rentacar.business.dtos.requests.brand.CreateBrandRequest;
+import dev.akinaksoy.rentacar.business.dtos.responses.brand.CreatedBrandResponse;
 
-import dev.akinaksoy.rentacar.business.dtos.responses.GetAllBrandResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetAllBrandResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.BrandRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Brand;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,25 +34,12 @@ public class BrandManager implements BrandService {
 
         brand.setCreatedDate(LocalDateTime.now());
 
-        Brand createdBrand = this.brandRepository.save(brand);
+        brandRepository.save(brand);
 
         CreatedBrandResponse response = this.modelMapperService
                 .forResponse().map(brand, CreatedBrandResponse.class);
 
         return response;
-
-
-
-        /*
-        MANUEL MAPPING!
-
-        Brand brand = new Brand();
-        brand.setName(request.getName());
-        brand.setCreatedDate(LocalDateTime.now());
-        this.brandRepository.save(brand);
-
-        return brand;
-         */
     }
 
     @Override
