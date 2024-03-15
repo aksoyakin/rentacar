@@ -1,4 +1,4 @@
-package dev.akinaksoy.rentacar.business.dtos.responses;
+package dev.akinaksoy.rentacar.business.dtos.responses.brand;
 
 
 import lombok.AllArgsConstructor;
@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class CreatedBrandResponse {
     private int id;
     private String name;
