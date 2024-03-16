@@ -4,6 +4,7 @@ import dev.akinaksoy.rentacar.business.abstracts.BrandService;
 import dev.akinaksoy.rentacar.business.dtos.requests.brand.CreateBrandRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.CreatedBrandResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetAllBrandResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetBrandByIdResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,18 @@ public class BrandController {
         return brandService.createBrand(request);
     }
 
-    @GetMapping
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<GetAllBrandResponse> getAllBrands(
 
     ){
         return brandService.getAllBrands();
+    }
+
+    @GetMapping("/{id}")
+    public GetBrandByIdResponse getBrandById(
+            @PathVariable int id
+    ){
+        return brandService.getBrandById(id);
     }
 }
