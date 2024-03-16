@@ -1,0 +1,13 @@
+package dev.akinaksoy.rentacar.business.dtos.responses.fuel;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class GetFuelByIdResponse {
+    private int id;
+    private String name;
+}
