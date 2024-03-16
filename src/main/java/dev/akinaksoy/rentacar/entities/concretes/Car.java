@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Table(name="cars")
 public class Car extends BaseEntity {
     @Column(name="modelYear")
-    private String modelYear;
+    private int modelYear;
 
     @Column(name="plate")
     private String plate;
