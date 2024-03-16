@@ -4,6 +4,7 @@ import dev.akinaksoy.rentacar.business.dtos.requests.transmission.CreateTransmis
 import dev.akinaksoy.rentacar.business.dtos.responses.model.CreatedModelResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.CreatedTransmissionResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetAllTransmissionResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetTransmissionByIdResponse;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ public interface TransmissionService {
 
     List<GetAllTransmissionResponse> getAllTransmissions(
 
+    );
+    GetTransmissionByIdResponse getTransmissionById(
+            int id
     );
 
 
