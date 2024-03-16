@@ -4,6 +4,7 @@ import dev.akinaksoy.rentacar.business.abstracts.ModelService;
 import dev.akinaksoy.rentacar.business.dtos.requests.model.CreateModelRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.model.CreatedModelResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.model.GetAllModelResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.model.GetModelByIdResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.ModelRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Model;
@@ -53,5 +54,18 @@ public class ModelManager implements ModelService {
                         .collect(Collectors.toList());
 
         return modelResponses;
+    }
+
+    @Override
+    public GetModelByIdResponse getModelById(
+            int id
+    ) {
+        Model model = modelRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is not model for this ID."));
+
+        GetModelByIdResponse response = modelMapperService.forResponse()
+                .map(model, GetModelByIdResponse.class);
+
+        return  response;
     }
 }
