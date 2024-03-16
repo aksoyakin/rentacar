@@ -27,7 +27,7 @@ public class BrandController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GetAllBrandResponse> getAll(
+    public List<GetAllBrandResponse> getAllBrands(
 
     ){
         return brandService.getAllBrands();

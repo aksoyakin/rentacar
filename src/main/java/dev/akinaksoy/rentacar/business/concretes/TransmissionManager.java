@@ -3,6 +3,7 @@ package dev.akinaksoy.rentacar.business.concretes;
 import dev.akinaksoy.rentacar.business.abstracts.TransmissionService;
 import dev.akinaksoy.rentacar.business.dtos.requests.transmission.CreateTransmissionRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.CreatedTransmissionResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetAllTransmissionResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.TransmissionRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Transmission;
@@ -10,6 +11,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -32,5 +35,20 @@ public class TransmissionManager implements TransmissionService {
                 .forResponse().map(transmission, CreatedTransmissionResponse.class);
 
         return response;
+    }
+
+    @Override
+    public List<GetAllTransmissionResponse> getAllTransmissions(
+
+    ) {
+        List<Transmission> transmissions = transmissionRepository.findAll();
+
+        List<GetAllTransmissionResponse> transmissionResponses =
+                transmissions.stream().map(transmission -> modelMapperService
+                        .forResponse()
+                        .map(transmission, GetAllTransmissionResponse.class))
+                        .collect(Collectors.toList());
+
+        return transmissionResponses;
     }
 }

@@ -3,6 +3,7 @@ package dev.akinaksoy.rentacar.business.concretes;
 import dev.akinaksoy.rentacar.business.abstracts.CarService;
 import dev.akinaksoy.rentacar.business.dtos.requests.car.CreateCarRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.car.CreatedCarResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.car.GetAllCarResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.CarRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Car;
@@ -10,6 +11,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -34,5 +37,20 @@ public class CarManager implements CarService {
                 .forResponse().map(car, CreatedCarResponse.class);
 
         return response;
+    }
+
+    @Override
+    public List<GetAllCarResponse> getAllCars(
+
+    ) {
+        List<Car> cars = carRepository.findAll();
+
+        List<GetAllCarResponse> carResponses =
+                cars.stream().map(car -> modelMapperService
+                        .forResponse()
+                        .map(car, GetAllCarResponse.class))
+                        .collect(Collectors.toList());
+
+        return carResponses;
     }
 }

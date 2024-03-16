@@ -3,10 +3,13 @@ package dev.akinaksoy.rentacar.api.controllers;
 import dev.akinaksoy.rentacar.business.abstracts.CarService;
 import dev.akinaksoy.rentacar.business.dtos.requests.car.CreateCarRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.car.CreatedCarResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.car.GetAllCarResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -20,5 +23,13 @@ public class CarController {
             @RequestBody @Valid CreateCarRequest request
     ){
         return carService.createCar(request);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<GetAllCarResponse> getAllCars(
+
+    ){
+        return carService.getAllCars();
     }
 }

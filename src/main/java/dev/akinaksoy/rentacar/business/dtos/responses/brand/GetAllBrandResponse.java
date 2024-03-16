@@ -12,4 +12,5 @@ import java.time.LocalDateTime;
 public class GetAllBrandResponse {
     private int id;
     private String name;
+    private LocalDateTime createdDate;
 }

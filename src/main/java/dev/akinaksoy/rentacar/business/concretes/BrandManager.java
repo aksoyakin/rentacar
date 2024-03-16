@@ -8,7 +8,6 @@ import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetAllBrandResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.BrandRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Brand;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

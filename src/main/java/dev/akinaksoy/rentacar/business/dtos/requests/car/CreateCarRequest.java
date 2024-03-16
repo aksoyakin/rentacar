@@ -1,5 +1,6 @@
 package dev.akinaksoy.rentacar.business.dtos.requests.car;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -17,4 +18,7 @@ public class CreateCarRequest {
     private int state;
     private double dailyPrice;
     private int modelId;
+
+    @JsonIgnore
+    private int brandId;
 }

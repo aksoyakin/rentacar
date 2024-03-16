@@ -3,9 +3,12 @@ package dev.akinaksoy.rentacar.api.controllers;
 import dev.akinaksoy.rentacar.business.abstracts.TransmissionService;
 import dev.akinaksoy.rentacar.business.dtos.requests.transmission.CreateTransmissionRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.CreatedTransmissionResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetAllTransmissionResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -19,5 +22,13 @@ public class TransmissionController {
             @RequestBody CreateTransmissionRequest request
     ){
         return transmissionService.createTransmission(request);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<GetAllTransmissionResponse> getAllTransmissions(
+
+    ){
+        return transmissionService.getAllTransmissions();
     }
 }
