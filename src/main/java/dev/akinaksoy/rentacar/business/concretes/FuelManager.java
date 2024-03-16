@@ -4,6 +4,7 @@ import dev.akinaksoy.rentacar.business.abstracts.FuelService;
 import dev.akinaksoy.rentacar.business.dtos.requests.fuel.CreateFuelRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.fuel.CreatedFuelResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.fuel.GetAllFuelResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.fuel.GetFuelByIdResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.FuelRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Fuel;
@@ -50,5 +51,18 @@ public class FuelManager implements FuelService {
                         .collect(Collectors.toList());
 
         return fuelResponses;
+    }
+
+    @Override
+    public GetFuelByIdResponse getFuelById(
+            int id
+    ) {
+        Fuel fuel = fuelRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no fuel for this ID"));
+
+        GetFuelByIdResponse response = modelMapperService.forResponse()
+                .map(fuel,GetFuelByIdResponse.class);
+
+        return response;
     }
 }
