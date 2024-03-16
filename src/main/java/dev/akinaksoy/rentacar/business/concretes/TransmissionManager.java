@@ -4,6 +4,7 @@ import dev.akinaksoy.rentacar.business.abstracts.TransmissionService;
 import dev.akinaksoy.rentacar.business.dtos.requests.transmission.CreateTransmissionRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.CreatedTransmissionResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetAllTransmissionResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetTransmissionByIdResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.TransmissionRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Transmission;
@@ -50,5 +51,18 @@ public class TransmissionManager implements TransmissionService {
                         .collect(Collectors.toList());
 
         return transmissionResponses;
+    }
+
+    @Override
+    public GetTransmissionByIdResponse getTransmissionById(
+            int id
+    ) {
+        Transmission transmission = transmissionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no transmission for this ID."));
+
+        GetTransmissionByIdResponse response = modelMapperService.forResponse()
+                .map(transmission,GetTransmissionByIdResponse.class);
+
+        return response;
     }
 }
