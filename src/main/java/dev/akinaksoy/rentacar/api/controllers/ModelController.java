@@ -35,7 +35,7 @@ public class ModelController {
     }
     @GetMapping("/{id}")
     public GetModelByIdResponse getModelById(
-            int id
+            @PathVariable int id
     ){
         return modelService.getModelById(id);
     }
