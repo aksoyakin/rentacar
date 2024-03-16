@@ -13,6 +13,6 @@ public class GetAllModelResponse {
     private int id;
     private String name;
     private int brandId;
-    // private  int fuelId;
-    // private int transmissionId;
+    private  int fuelId;
+    private int transmissionId;
 }

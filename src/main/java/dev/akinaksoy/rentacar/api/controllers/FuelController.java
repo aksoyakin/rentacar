@@ -28,7 +28,7 @@ public class FuelController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GetAllFuelResponse> getAll(
+    public List<GetAllFuelResponse> getAllFuels(
 
     ){
         return fuelService.getAllFuels();
