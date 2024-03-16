@@ -4,6 +4,7 @@ import dev.akinaksoy.rentacar.business.abstracts.ModelService;
 import dev.akinaksoy.rentacar.business.dtos.requests.model.CreateModelRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.model.CreatedModelResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.model.GetAllModelResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.model.GetModelByIdResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,11 @@ public class ModelController {
 
     ){
         return modelService.getAllModels();
+    }
+    @GetMapping("/{id}")
+    public GetModelByIdResponse getModelById(
+            int id
+    ){
+        return modelService.getModelById(id);
     }
 }
