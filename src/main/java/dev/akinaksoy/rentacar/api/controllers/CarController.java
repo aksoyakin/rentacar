@@ -4,6 +4,7 @@ import dev.akinaksoy.rentacar.business.abstracts.CarService;
 import dev.akinaksoy.rentacar.business.dtos.requests.car.CreateCarRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.car.CreatedCarResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.car.GetAllCarResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.car.GetCarByIdResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,12 @@ public class CarController {
 
     ){
         return carService.getAllCars();
+    }
+
+    @GetMapping("/{id}")
+    public GetCarByIdResponse getCarById(
+            @PathVariable int id
+    ){
+        return carService.getCarById(id);
     }
 }

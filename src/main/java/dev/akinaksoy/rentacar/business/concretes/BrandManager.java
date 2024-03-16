@@ -5,6 +5,7 @@ import dev.akinaksoy.rentacar.business.dtos.requests.brand.CreateBrandRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.CreatedBrandResponse;
 
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetAllBrandResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetBrandByIdResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.BrandRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Brand;
@@ -54,5 +55,18 @@ public class BrandManager implements BrandService {
                                 .collect(Collectors.toList());
 
         return brandResponses;
+    }
+
+    @Override
+    public GetBrandByIdResponse getBrandById(
+            int id
+    ) {
+        Brand brand = brandRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no brand for this ID."));
+
+        GetBrandByIdResponse response = modelMapperService.forResponse()
+                .map(brand, GetBrandByIdResponse.class);
+
+        return response;
     }
 }

@@ -4,6 +4,7 @@ import dev.akinaksoy.rentacar.business.abstracts.CarService;
 import dev.akinaksoy.rentacar.business.dtos.requests.car.CreateCarRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.car.CreatedCarResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.car.GetAllCarResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.car.GetCarByIdResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.CarRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Car;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class CarManager implements CarService {
+
     private CarRepository carRepository;
     private ModelMapperService modelMapperService;
 
@@ -52,5 +54,18 @@ public class CarManager implements CarService {
                         .collect(Collectors.toList());
 
         return carResponses;
+    }
+
+    @Override
+    public GetCarByIdResponse getCarById(
+            int id
+    ) {
+        Car car = carRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There no car for this ID."));
+
+        GetCarByIdResponse response = modelMapperService.forResponse()
+                .map(car,GetCarByIdResponse.class);
+
+        return response;
     }
 }
