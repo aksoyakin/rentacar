@@ -4,6 +4,7 @@ import dev.akinaksoy.rentacar.business.abstracts.TransmissionService;
 import dev.akinaksoy.rentacar.business.dtos.requests.transmission.CreateTransmissionRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.CreatedTransmissionResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetAllTransmissionResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetTransmissionByIdResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,11 @@ public class TransmissionController {
 
     ){
         return transmissionService.getAllTransmissions();
+    }
+    @GetMapping("/{id}")
+    public GetTransmissionByIdResponse getTransmissionById(
+            @PathVariable int id
+    ) {
+        return transmissionService.getTransmissionById(id);
     }
 }
