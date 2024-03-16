@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetAllFuelResponse {
-    private  int id;
+    private int id;
     private String name;
 }
