@@ -2,10 +2,12 @@ package dev.akinaksoy.rentacar.business.concretes;
 
 import dev.akinaksoy.rentacar.business.abstracts.BrandService;
 import dev.akinaksoy.rentacar.business.dtos.requests.brand.CreateBrandRequest;
+import dev.akinaksoy.rentacar.business.dtos.requests.brand.UpdateBrandRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.CreatedBrandResponse;
 
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetAllBrandResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetBrandByIdResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.brand.UpdateBrandResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.BrandRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Brand;
@@ -68,5 +70,30 @@ public class BrandManager implements BrandService {
                 .map(brand, GetBrandByIdResponse.class);
 
         return response;
+    }
+
+    @Override
+    public UpdateBrandResponse updateBrandById(
+            UpdateBrandRequest request,
+            int id
+    ) {
+        Brand brand = brandRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no brand for this ID."));
+
+        Brand updatedBrand = modelMapperService.forRequest()
+                .map(request,Brand.class);
+
+        brand.setId(id);
+        brand.setUpdatedDate(LocalDateTime.now());
+
+        brand.setName(updatedBrand.getName() != null ? updatedBrand.getName() : brand.getName());
+
+        brandRepository.save(brand);
+
+        UpdateBrandResponse response = modelMapperService.forResponse()
+                .map(brand, UpdateBrandResponse.class);
+
+        return response;
+
     }
 }
