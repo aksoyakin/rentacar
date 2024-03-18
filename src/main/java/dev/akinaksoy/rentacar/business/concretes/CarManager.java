@@ -2,9 +2,12 @@ package dev.akinaksoy.rentacar.business.concretes;
 
 import dev.akinaksoy.rentacar.business.abstracts.CarService;
 import dev.akinaksoy.rentacar.business.dtos.requests.car.CreateCarRequest;
+import dev.akinaksoy.rentacar.business.dtos.requests.car.UpdateCarRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.car.CreatedCarResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.car.GetAllCarResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.car.GetCarByIdResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.car.UpdateCarResponse;
+import dev.akinaksoy.rentacar.business.rules.CarBusinessRules;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.CarRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Car;
@@ -21,18 +24,22 @@ public class CarManager implements CarService {
 
     private CarRepository carRepository;
     private ModelMapperService modelMapperService;
+    private CarBusinessRules carBusinessRules;
 
 
     @Override
     public CreatedCarResponse createCar(
             CreateCarRequest request
     ) {
+        carBusinessRules.plateCanNotBeDuplicated(request.getPlate());
+
         Car car = this.modelMapperService
                 .forRequest()
                 .map(request,Car.class);
 
         car.setCreatedDate(LocalDateTime.now());
 
+//        car.setId(0);
         carRepository.save(car);
 
         CreatedCarResponse response = this.modelMapperService
@@ -67,5 +74,32 @@ public class CarManager implements CarService {
                 .map(car,GetCarByIdResponse.class);
 
         return response;
+    }
+
+    @Override
+    public UpdateCarResponse updateCarById(
+            UpdateCarRequest request,
+            int id
+    ) {
+        Car car = carRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no car for this ID."));
+
+        Car updatedCar = modelMapperService.forRequest()
+                .map(request,Car.class);
+
+        car.setId(id);
+        car.setUpdatedDate(LocalDateTime.now());
+
+        car.setPlate(updatedCar.getPlate());
+        car.setState(updatedCar.getState());
+        car.setDailyPrice(updatedCar.getDailyPrice());
+
+        carRepository.save(car);
+
+        UpdateCarResponse response = modelMapperService.forResponse()
+                .map(car,UpdateCarResponse.class);
+
+        return response;
+
     }
 }
