@@ -2,9 +2,11 @@ package dev.akinaksoy.rentacar.api.controllers;
 
 import dev.akinaksoy.rentacar.business.abstracts.FuelService;
 import dev.akinaksoy.rentacar.business.dtos.requests.fuel.CreateFuelRequest;
+import dev.akinaksoy.rentacar.business.dtos.requests.fuel.UpdateFuelRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.fuel.CreatedFuelResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.fuel.GetAllFuelResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.fuel.GetFuelByIdResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.fuel.UpdateFuelResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -39,6 +41,13 @@ public class FuelController {
             @PathVariable int id
     ){
         return fuelService.getFuelById(id);
+    }
+    @PutMapping("/{id}")
+    public UpdateFuelResponse updateFuelById(
+            @RequestBody UpdateFuelRequest request,
+            @PathVariable int id
+    ){
+        return fuelService.updateFuelById(request,id);
     }
 
 
