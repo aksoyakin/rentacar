@@ -8,6 +8,7 @@ import dev.akinaksoy.rentacar.business.dtos.responses.brand.CreatedBrandResponse
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetAllBrandResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.GetBrandByIdResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.brand.UpdateBrandResponse;
+import dev.akinaksoy.rentacar.business.rules.BrandBusinessRules;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.BrandRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Brand;
@@ -24,12 +25,17 @@ public class BrandManager implements BrandService {
 
     private BrandRepository brandRepository;
     private ModelMapperService modelMapperService;
+    private BrandBusinessRules brandBusinessRules;
 
 
     @Override
     public CreatedBrandResponse createBrand(
             CreateBrandRequest request
     ) {
+        brandBusinessRules.brandNameCanNotBeDuplicated(request.getName());
+
+        // TODO: Business rules.
+
         Brand brand = this.modelMapperService
                 .forRequest()
                 .map(request,Brand.class);
