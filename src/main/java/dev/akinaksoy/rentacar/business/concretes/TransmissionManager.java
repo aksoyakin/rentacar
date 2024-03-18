@@ -2,9 +2,11 @@ package dev.akinaksoy.rentacar.business.concretes;
 
 import dev.akinaksoy.rentacar.business.abstracts.TransmissionService;
 import dev.akinaksoy.rentacar.business.dtos.requests.transmission.CreateTransmissionRequest;
+import dev.akinaksoy.rentacar.business.dtos.requests.transmission.UpdateTransmissionRequest;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.CreatedTransmissionResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetAllTransmissionResponse;
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetTransmissionByIdResponse;
+import dev.akinaksoy.rentacar.business.dtos.responses.transmission.UpdateTransmissionResponse;
 import dev.akinaksoy.rentacar.core.utilities.mapping.ModelMapperService;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.TransmissionRepository;
 import dev.akinaksoy.rentacar.entities.concretes.Transmission;
@@ -62,6 +64,30 @@ public class TransmissionManager implements TransmissionService {
 
         GetTransmissionByIdResponse response = modelMapperService.forResponse()
                 .map(transmission,GetTransmissionByIdResponse.class);
+
+        return response;
+    }
+
+    @Override
+    public UpdateTransmissionResponse updateTransmissionById(
+            UpdateTransmissionRequest request,
+            int id
+    ) {
+        Transmission transmission = transmissionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no transmission for this ID."));
+
+        Transmission updatedTransmission = modelMapperService.forRequest()
+                .map(request,Transmission.class);
+
+        transmission.setId(id);
+        transmission.setUpdatedDate(LocalDateTime.now());
+
+        transmission.setName(updatedTransmission.getName());
+
+        transmissionRepository.save(transmission);
+
+        UpdateTransmissionResponse response = modelMapperService.forResponse()
+                .map(transmission, UpdateTransmissionResponse.class);
 
         return response;
     }
