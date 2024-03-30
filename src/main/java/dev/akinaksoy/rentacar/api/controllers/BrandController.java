@@ -50,4 +50,13 @@ public class BrandController {
     ) {
         return brandService.updateBrandById(request,id);
     }
+
+    @DeleteMapping("/{id}")
+    void deleteBrandById(
+            @PathVariable int id
+    ){
+        brandService.deleteBrandById(id);
+    }
+
+
 }

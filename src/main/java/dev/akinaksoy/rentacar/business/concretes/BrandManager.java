@@ -102,4 +102,14 @@ public class BrandManager implements BrandService {
         return response;
 
     }
+    @Override
+    public void deleteBrandById(
+            int id
+    ) {
+        Brand brand = brandRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no brand for this ID."));
+
+        brand.setDeletedDate(LocalDateTime.now());
+        brandRepository.deleteById(id);
+    }
 }

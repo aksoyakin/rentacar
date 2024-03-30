@@ -24,4 +24,8 @@ public interface BrandService {
             UpdateBrandRequest request,
             int id
     );
+    void deleteBrandById(
+            int id
+    );
+
 }
