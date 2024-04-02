@@ -48,4 +48,10 @@ public class ModelController {
     ) {
         return modelService.updateModelById(request,id);
     }
+    @DeleteMapping("/{id}")
+    public void deleteModelById(
+            @PathVariable int id
+    ){
+        modelService.deleteModelById(id);
+    }
 }
