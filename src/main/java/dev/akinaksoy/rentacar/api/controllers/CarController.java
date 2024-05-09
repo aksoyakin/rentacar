@@ -50,4 +50,10 @@ public class CarController {
     ){
         return carService.updateCarById(request,id);
     }
+    @DeleteMapping("{id}")
+    void deleteCarById(
+            @PathVariable int id
+    ){
+        carService.deleteCarById(id);
+    }
 }

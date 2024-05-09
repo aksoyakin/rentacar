@@ -25,4 +25,7 @@ public interface CarService {
             UpdateCarRequest request,
             int id
     );
+    void deleteCarById(
+            int id
+    );
 }

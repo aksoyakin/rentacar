@@ -102,4 +102,14 @@ public class CarManager implements CarService {
         return response;
 
     }
+
+    @Override
+    public void deleteCarById(
+            int id
+    ) {
+        Car car = carRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no car for this ID."));
+        car.setDeletedDate(LocalDateTime.now());
+        carRepository.deleteById(id);
+    }
 }
