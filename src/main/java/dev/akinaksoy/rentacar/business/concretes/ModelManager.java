@@ -37,7 +37,7 @@ public class ModelManager implements ModelService {
                 .forRequest()
                 .map(request,Model.class);
 
-//        model.setId(0);
+        model.setId(0);
         model.setCreatedDate(LocalDateTime.now());
         
         this.modelRepository.save(model);
@@ -100,5 +100,17 @@ public class ModelManager implements ModelService {
 
         return response;
 
+    }
+
+    @Override
+    public void deleteModelById(
+            int id
+    ) {
+        Model model = modelRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("There is no model for this id."));
+
+        model.setDeletedDate(LocalDateTime.now());
+
+        modelRepository.deleteById(id);
     }
 }

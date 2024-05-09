@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>dev.akinaksoy</groupId>
-    <artifactId>rentacar</artifactId>
+    <artifactId>rentacar-be</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>rentacar</name>
-    <description>rentacar</description>
+    <name>rentacar-be</name>
+    <description>rentacar-be</description>
     <properties>
         <java.version>17</java.version>
     </properties>
