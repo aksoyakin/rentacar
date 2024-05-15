@@ -10,11 +10,12 @@ import dev.akinaksoy.rentacar.business.dtos.responses.brand.UpdateBrandResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/brands")
@@ -29,7 +30,7 @@ public class BrandController {
         return brandService.createBrand(request);
     }
 
-    @GetMapping()
+    @GetMapping (produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<GetAllBrandResponse> getAllBrands(
 

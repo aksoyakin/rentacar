@@ -10,10 +10,12 @@ import dev.akinaksoy.rentacar.business.dtos.responses.transmission.GetTransmissi
 import dev.akinaksoy.rentacar.business.dtos.responses.transmission.UpdateTransmissionResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/trasmissions")
@@ -28,7 +30,7 @@ public class TransmissionController {
         return transmissionService.createTransmission(request);
     }
 
-    @GetMapping
+    @GetMapping (produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<GetAllTransmissionResponse> getAllTransmissions(
 

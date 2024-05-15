@@ -10,10 +10,12 @@ import dev.akinaksoy.rentacar.business.dtos.responses.fuel.UpdateFuelResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/fuels")
@@ -28,7 +30,7 @@ public class FuelController {
         return fuelService.createFuel(request);
     }
 
-    @GetMapping
+    @GetMapping (produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<GetAllFuelResponse> getAllFuels(
 

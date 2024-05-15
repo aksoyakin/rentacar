@@ -10,10 +10,12 @@ import dev.akinaksoy.rentacar.business.dtos.responses.car.UpdateCarResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/cars")
@@ -28,7 +30,7 @@ public class CarController {
         return carService.createCar(request);
     }
 
-    @GetMapping
+    @GetMapping (produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<GetAllCarResponse> getAllCars(
 
