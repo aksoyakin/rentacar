@@ -68,6 +68,5 @@ public class AuthController {
             authenticationResponse.setUserRole(optionalUser.get().getUserRole());
         }
         return authenticationResponse;
-
     }
 }

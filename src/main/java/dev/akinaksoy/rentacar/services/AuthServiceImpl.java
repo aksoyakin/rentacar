@@ -5,6 +5,7 @@ import dev.akinaksoy.rentacar.business.dtos.UserDto;
 import dev.akinaksoy.rentacar.dataaccess.abstracts.UserRepository;
 import dev.akinaksoy.rentacar.entities.concretes.User;
 import dev.akinaksoy.rentacar.entities.concretes.enums.UserRole;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,20 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+
+    @PostConstruct
+    public void createAdminAccount(){
+        User adminAccount = userRepository.findByUserRole(UserRole.ADMIN);
+        if (adminAccount == null){
+            User newAdminAccount = new User();
+            newAdminAccount.setName("Admin");
+            newAdminAccount.setUserRole(UserRole.ADMIN);
+            newAdminAccount.setEmail("admin@test.com");
+            newAdminAccount.setPassword(new BCryptPasswordEncoder().encode("admin"));
+
+            userRepository.save(newAdminAccount);
+        }
+    }
 
     @Override
     public UserDto createCustomer(SignupRequest signupRequest) {
