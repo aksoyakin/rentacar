@@ -6,6 +6,7 @@ import dev.akinaksoy.rentacar.dataaccess.abstracts.UserRepository;
 import dev.akinaksoy.rentacar.entities.concretes.User;
 import dev.akinaksoy.rentacar.entities.concretes.enums.UserRole;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +20,9 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         user.setEmail(signupRequest.getEmail());
         user.setName(signupRequest.getName());
-        user.setPassword(signupRequest.getPassword());
+
+        user.setPassword(new BCryptPasswordEncoder().encode(signupRequest.getPassword()));
+
         user.setUserRole(UserRole.CUSTOMER);
 
         User createdCustomer = userRepository.save(user);
